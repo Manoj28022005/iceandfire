@@ -1,4 +1,5 @@
 import React from 'react';
+import { useEffect } from 'react';
 import './App.css';
 import Home from './screens/Home.jsx';
 import Login from './screens/Login.jsx';
@@ -16,6 +17,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 function App() {
+  useEffect(() => {
+    localStorage.removeItem("authToken");
+    localStorage.removeItem("email");
+  }, []);
   return (
      <CartProvider>
         <Router>

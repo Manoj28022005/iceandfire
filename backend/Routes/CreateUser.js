@@ -74,8 +74,13 @@ router.post("/loginuser", [
             }
         };
 
-        const authToken = jwt.sign(data, jwtSecret);
-        return res.json({ success: true, authToken: authToken });
+        // Set token expiration time (e.g., 30 minutes)
+        const authToken = jwt.sign(data, jwtSecret, { expiresIn: '30m' });
+
+        // Include the expiration time in the response
+        const expirationTime = new Date().getTime() + 30 * 60 * 1000; // 30 minutes from now
+
+        return res.json({ success: true, authToken: authToken, expirationTime: expirationTime });
     } catch (error) {
         console.error("Error logging in:", error);
         res.json({ success: false });
