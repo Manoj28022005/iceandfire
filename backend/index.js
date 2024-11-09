@@ -7,7 +7,13 @@ const nodemailer = require('nodemailer');
 require('dotenv').config();
 
 mongoDB();
-app.use(cors());
+app.use(cors(
+    {
+        origin:["https://iceandfire.vercel.app"],
+        methods:["POST","GET"],
+        credentials:true
+    }
+));
 app.use(express.json());
 
 const transporter = nodemailer.createTransport({
