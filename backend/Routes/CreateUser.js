@@ -8,7 +8,7 @@ const nodemailer = require('nodemailer');
 const crypto = require('crypto');
 const twilio = require('twilio');
 
-const jwtSecret = "Mynameisrandomguy";
+const jwtSecret =process.env.JWT_SECRET;
 
 const transporter = nodemailer.createTransport({
     service: 'gmail',
