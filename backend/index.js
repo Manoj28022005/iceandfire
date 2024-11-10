@@ -7,13 +7,13 @@ const nodemailer = require('nodemailer');
 require('dotenv').config();
 
 mongoDB();
-app.use(cors(
-    {
-        origin:["https://iceandfire-steel.vercel.app/"],
-        methods:["POST","GET"],
-        credentials:true
-    }
-));
+
+app.use(cors({
+    origin: ["http://localhost:3000", "https://iceandfire-steel.vercel.app"], // Allow specific origins
+    methods: ["POST", "GET"], // Allow specific methods
+    credentials: true // Allow cookies with requests
+}));
+
 app.use(express.json());
 
 const transporter = nodemailer.createTransport({
@@ -45,15 +45,7 @@ app.get('/', (req, res) => {
     res.send("Hello World");
 });
 
-app.use((req, res, next) => {
-    res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
-    res.header(
-        "Access-Control-Allow-Headers",
-        "Origin, X-Requested-With, Content-Type, Accept"
-    );
-    next();
-});
-
+// Routes for your application
 app.use('/api', require('./Routes/CreateUser'));
 app.use('/api', require('./Routes/DisplayData'));
 app.use('/api', require('./Routes/Items'));
