@@ -56,7 +56,7 @@ function Profile({ darkMode }) {
           />
         </button>
         <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
-          <li><a className="dropdown-item" href="/my-orders" style={{ fontWeight: 'normal' }}>My Orders</a></li>
+          <li><a className="dropdown-item" href={`${process.env.REACT_APP_WEB_URL}/my-orders`} style={{ fontWeight: 'normal' }}>My Orders</a></li>
           <li>
             <button className="dropdown-item" onClick={handleChangePasswordClick} style={{ fontWeight: 'normal' }}>
               Change Password
@@ -72,7 +72,7 @@ function Profile({ darkMode }) {
               Update Phone number
             </button>
           </li>
-          <li><a className="dropdown-item" href="/support" style={{ fontWeight: 'normal' }}>Support</a></li>
+          <li><a className="dropdown-item" href={`${process.env.REACT_APP_WEB_URL}/support`} style={{ fontWeight: 'normal' }}>Support</a></li>
           <li><button className="dropdown-item" onClick={handleLogout} style={{ fontWeight: 'normal' }}>Logout</button></li>
         </ul>
       </div>
