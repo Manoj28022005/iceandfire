@@ -11,7 +11,7 @@ function Home() {
   useEffect(() => {
     const fetchFoodItems = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/food-item-names");
+        const response = await fetch(`${process.env.REACT_APP_WEB_URL}/api/food-item-names`);
         const items = await response.json();
         setFoodItems(items);
       } catch (error) {
