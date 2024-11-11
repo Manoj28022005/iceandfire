@@ -6,7 +6,7 @@ function Login({ darkMode, showLoginModal, setShowLoginModal, openSignupModal })
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://localhost:5000/api/loginuser", {
+      const response = await fetch(`${process.env.REACT_APP_WEB_URL}/api/loginuser`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
