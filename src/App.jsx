@@ -16,7 +16,7 @@ function App() {
     localStorage.removeItem("email");
 
     // Example API call using the base URL
-    fetch(`${process.env.WEB_URL}/api/some-endpoint`)
+    fetch(`${process.env.REACT_APP_WEB_URL}/api/some-endpoint`)
       .then(response => response.json())
       .then(data => console.log(data))
       .catch(error => console.error("Error:", error));
