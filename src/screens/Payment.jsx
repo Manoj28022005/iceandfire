@@ -21,7 +21,7 @@ function Payment({ user }) {
           orderTime: new Date().toISOString()
         };
 
-        const response = await fetch('/api/orders', {
+        const response = await fetch(`${process.env.REACT_APP_WEB_URL}/api/orders`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(orderDetails)
@@ -29,7 +29,7 @@ function Payment({ user }) {
 
         if (response.ok) {
           alert('Order placed successfully!');
-          navigate('/'); // Redirect to home or order success page
+          navigate(`${process.env.REACT_APP_WEB_URL}`); // Redirect to home or order success page
         } else {
           alert('Failed to place the order.');
         }
