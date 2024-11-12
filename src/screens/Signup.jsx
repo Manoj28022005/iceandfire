@@ -63,7 +63,7 @@ function Signup({ darkMode, showSignupModal, setShowSignupModal, openLoginModal 
     }
 
     try {
-      const response = await fetch("http://localhost:5000/api/sendOtp", {
+      const response = await fetch(`${process.env.REACT_APP_WEB_URL}/api/sendOtp`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -85,7 +85,7 @@ function Signup({ darkMode, showSignupModal, setShowSignupModal, openLoginModal 
 
   const onVerifyOTP = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/verifyOtp", {
+      const response = await fetch(`${process.env.REACT_APP_WEB_URL}/api/verifyOtp`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
