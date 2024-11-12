@@ -9,7 +9,7 @@ require('dotenv').config();
 mongoDB();
 
 app.use(cors({
-  origin: "https://iceandfire-frontend.vercel.app/",
+  origin: "*",
     methods: ["POST", "GET"], // Allow specific methods
     credentials: true // Allow cookies with requests
 }));
