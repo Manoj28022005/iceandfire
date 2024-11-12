@@ -10,7 +10,7 @@ mongoDB();
 
 const cors = require('cors');
 app.use(cors({
-  origin: "https://iceandfire-frontend.vercel.app",
+  origin: "*",
     methods: ["POST", "GET"], // Allow specific methods
     credentials: true // Allow cookies with requests
 }));
