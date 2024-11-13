@@ -6,17 +6,10 @@ const mongoDB = require('./db');
 const nodemailer = require('nodemailer');
 require('dotenv').config({ path: './backend/.env' });
 
-
-
-
 mongoDB();
 
 app.use(cors({
-<<<<<<< HEAD
-    origin: "*" ,// Allow specific origins
-=======
     origin: "https://iceandfire-frontend.vercel.app" ,// Allow specific origins
->>>>>>> 5d202f064d9a98c6f6910975d6dff604380dffdf
     methods: ["POST", "GET"], // Allow specific methods
     credentials: true // Allow cookies with requests
 }));
