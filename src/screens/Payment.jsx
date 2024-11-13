@@ -2,6 +2,7 @@ import React from 'react';
 import { useCart } from '../components/ContextReducer';
 import { useNavigate } from 'react-router-dom';
 
+
 function Payment({ user }) {
   const cartItems = useCart();
   const navigate = useNavigate();
@@ -29,7 +30,7 @@ function Payment({ user }) {
 
         if (response.ok) {
           alert('Order placed successfully!');
-          navigate(`${process.env.REACT_APP_WEB_URL}`); // Redirect to home or order success page
+          navigate('/'); // Redirect to home or order success page
         } else {
           alert('Failed to place the order.');
         }
