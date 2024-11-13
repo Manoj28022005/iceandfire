@@ -25,7 +25,7 @@ function ChangePassword({ darkMode, showPassModal, setShowPassModal }) {
         newpassword: credentials.newpassword1
       });
 
-      const response = await fetch("http://localhost:5000/api/changePassword", {
+      const response = await fetch(`${process.env.REACT_APP_WEB_URL}/api/changePassword`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

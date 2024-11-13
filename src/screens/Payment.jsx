@@ -2,6 +2,7 @@ import React from 'react';
 import { useCart } from '../components/ContextReducer';
 import { useNavigate } from 'react-router-dom';
 
+
 function Payment({ user }) {
   const cartItems = useCart();
   const navigate = useNavigate();
@@ -21,7 +22,7 @@ function Payment({ user }) {
           orderTime: new Date().toISOString()
         };
 
-        const response = await fetch('/api/orders', {
+        const response = await fetch(`${process.env.REACT_APP_WEB_URL}/api/orders`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(orderDetails)

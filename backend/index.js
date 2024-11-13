@@ -4,12 +4,15 @@ const cors = require('cors');
 const port = 5000;
 const mongoDB = require('./db');
 const nodemailer = require('nodemailer');
-require('dotenv').config();
+require('dotenv').config({ path: './backend/.env' });
+
+
+
 
 mongoDB();
 
 app.use(cors({
-    origin: ["http://localhost:3000", "https://iceandfire-frontend.vercel.app"], // Allow specific origins
+    origin: "*" ,// Allow specific origins
     methods: ["POST", "GET"], // Allow specific methods
     credentials: true // Allow cookies with requests
 }));

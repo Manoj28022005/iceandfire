@@ -2,14 +2,22 @@ import React, { useState } from 'react';
 
 function Login({ darkMode, showLoginModal, setShowLoginModal, openSignupModal }) {
   const [credentials, setCredentials] = useState({ email: "", password: "" });
+  const [errorMessage, setErrorMessage] = useState(""); // Store error messages
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Input validation before making the request
+    if (!credentials.email || !credentials.password) {
+      setErrorMessage("Email and Password are required.");
+      return;
+    }
+
     try {
-      const response = await fetch("http://localhost:5000/api/loginuser", {
+      const response = await fetch(`${process.env.REACT_APP_WEB_URL}/api/loginuser`, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           email: credentials.email,
@@ -17,17 +25,26 @@ function Login({ darkMode, showLoginModal, setShowLoginModal, openSignupModal })
         })
       });
 
+      // Check if the response is OK (status 200)
+      if (!response.ok) {
+        setErrorMessage(`Error: ${response.status} - ${response.statusText}`);
+        return;
+      }
+
       const json = await response.json();
+
       if (json.success) {
         localStorage.setItem("email", credentials.email);
         localStorage.setItem("authToken", json.authToken);
         setCredentials({ email: "", password: "" });
         setShowLoginModal(false); // Close login modal on success
+        setErrorMessage(""); // Clear error message if successful
       } else {
-        alert("Invalid credentials");
+        setErrorMessage("Invalid credentials.");
       }
     } catch (error) {
       console.error("Error:", error);
+      setErrorMessage("An unexpected error occurred. Please try again.");
     }
   };
 
@@ -83,6 +100,11 @@ function Login({ darkMode, showLoginModal, setShowLoginModal, openSignupModal })
                       required
                     />
                   </div>
+                  {errorMessage && (
+                    <div className="alert alert-danger" role="alert">
+                      {errorMessage}
+                    </div>
+                  )}
                   <button type="submit" className="m-3 btn btn-primary">Submit</button>
                   <button type="button" className="m-3 btn btn-danger" onClick={openSignupModal}>
                     I'm a new user
