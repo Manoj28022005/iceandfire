@@ -4,16 +4,18 @@ const cors = require('cors');
 const port = 5000;
 const mongoDB = require('./db');
 const nodemailer = require('nodemailer');
-require('dotenv').config();
+require('dotenv').config({ path: './backend/.env' });
+
+
+
 
 mongoDB();
 
 app.use(cors({
-  origin: "*",
+    origin: "*" ,// Allow specific origins
     methods: ["POST", "GET"], // Allow specific methods
     credentials: true // Allow cookies with requests
 }));
-
 
 app.use(express.json());
 
