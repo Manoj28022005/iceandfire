@@ -15,7 +15,7 @@ function Card({ title, image, description, price, id }) {
     setTimeout(() => setAddedToCart(false), 1000); // Hide the tick mark after 1 second
   };
 
-  const imageUrl = `/${image}`;
+  const imageUrl = `${process.env.REACT_APP_WEB_URL}/${image}`;
 
   return (
     <div className="d-flex justify-content-center align-items-center" style={{ height: "80vh" }}>
