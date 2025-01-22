@@ -25,23 +25,35 @@ function Cart({ darkMode, showCartModal, setShowCartModal }) {
   const handlePlaceOrder = () => {
     if (window.confirm("Are you sure you want to place this order?")) {
       closeModal();
-      navigate('/payment'); // Navigate to the payment page
+
+      const totalPrice=calculateTotal();
+      navigate('/payment', {state: {cartItems,totalPrice}});
     }
   };
 
   return (
     <>
       {showCartModal && (
-        <div className={`modal ${darkMode ? 'dark-mode' : ''}`} style={{ display: 'block' }}>
-          <div className="modal-dialog">
-            <div className="modal-content">
+        <div
+          className="modal fade show"
+          tabIndex="-1"
+          role="dialog"
+          style={{ display: 'block' }}
+          aria-hidden="true"
+        >
+          <div className="modal-dialog" role="document">
+            <div className={`modal-content ${darkMode ? 'bg-dark text-light' : 'bg-light text-dark'}`}>
               <div className="modal-header">
                 <h5 className="modal-title">My Cart</h5>
-                <button type="button" className="btn-close" onClick={closeModal}></button>
+                <button
+                  type="button"
+                  className="btn-close"
+                  onClick={closeModal}
+                ></button>
               </div>
               <div className="modal-body">
                 {cartItems.length > 0 ? (
-                  <table className="table">
+                  <table className={`table ${darkMode ? 'table-dark' : ''}`}>
                     <thead>
                       <tr>
                         <th>S.No.</th>
@@ -68,7 +80,7 @@ function Cart({ darkMode, showCartModal, setShowCartModal }) {
                     </tbody>
                   </table>
                 ) : (
-                  <p>Your cart is empty.</p>  
+                  <p>Your cart is empty.</p>
                 )}
                 <h5 className="mt-3">Total: ₹{calculateTotal()}</h5>
               </div>

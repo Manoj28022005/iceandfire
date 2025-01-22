@@ -9,6 +9,7 @@ import { CartProvider } from "./components/ContextReducer";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import ChooseUPI from './screens/ChooseUPI.jsx';
 
 function App() {
   useEffect(() => {
@@ -26,6 +27,9 @@ function App() {
             <Route path="/loginuser" element={<Login />} />
             <Route path="/Signup" element={<Signup />} />
             <Route path="/payment" element={<Payment />} />
+            <Route path="/chooseupi" element={<ChooseUPI />} />
+            {/* <Route path="/cod" element={<COD />} /> */}
+
           </Routes>
         </div>
       </Router>

@@ -22,7 +22,7 @@ function Login({ darkMode, showLoginModal, setShowLoginModal, openSignupModal })
         body: JSON.stringify({
           email: credentials.email,
           password: credentials.password,
-        })
+        }),
       });
 
       // Check if the response is OK (status 200)
@@ -34,8 +34,11 @@ function Login({ darkMode, showLoginModal, setShowLoginModal, openSignupModal })
       const json = await response.json();
 
       if (json.success) {
+        // Store email, authToken, and name in localStorage
         localStorage.setItem("email", credentials.email);
         localStorage.setItem("authToken", json.authToken);
+        localStorage.setItem("name", json.name); // Store the name
+
         setCredentials({ email: "", password: "" });
         setShowLoginModal(false); // Close login modal on success
         setErrorMessage(""); // Clear error message if successful

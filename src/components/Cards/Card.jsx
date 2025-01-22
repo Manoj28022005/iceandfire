@@ -4,7 +4,7 @@ import { useDispatch } from '../ContextReducer';
 function Card({ title, image, description, price, id }) {
   const dispatch = useDispatch();
   const [quantity, setQuantity] = useState(1);
-  const [addedToCart, setAddedToCart] = useState(false); // State for showing the tick mark
+  const [addedToCart, setAddedToCart] = useState(false);
 
   const handleAddToCart = () => {
     dispatch({
@@ -15,7 +15,7 @@ function Card({ title, image, description, price, id }) {
     setTimeout(() => setAddedToCart(false), 1000); // Hide the tick mark after 1 second
   };
 
-  const imageUrl = `${process.env.REACT_APP_WEB_URL}/${image}`;
+  const imageUrl = `/${image}`;
 
   return (
     <div className="d-flex justify-content-center align-items-center" style={{ height: "80vh" }}>

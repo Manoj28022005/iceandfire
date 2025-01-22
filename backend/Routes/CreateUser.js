@@ -5,8 +5,10 @@ const { body, validationResult } = require('express-validator');
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const nodemailer = require('nodemailer');
+const orders=require('../modals/Order');
 const crypto = require('crypto');
 const twilio = require('twilio');
+const mongoose = require('mongoose');
 
 const jwtSecret =process.env.JWT_SECRET;
 
@@ -70,7 +72,7 @@ router.post("/loginuser", [
 
         const data = {
             user: {
-                id: userData.id
+                id: userData._id
             }
         };
 
@@ -80,7 +82,7 @@ router.post("/loginuser", [
         // Include the expiration time in the response
         const expirationTime = new Date().getTime() + 30 * 60 * 1000; // 30 minutes from now
 
-        return res.json({ success: true, authToken: authToken, expirationTime: expirationTime });
+        return res.json({ success: true, authToken: authToken, expirationTime: expirationTime, name:userData.name });
     } catch (error) {
         console.error("Error logging in:", error);
         res.json({ success: false });
@@ -200,4 +202,36 @@ router.post('/twilio_verifyotp', (req, res) => {
   }
 });
 
+//updating the order_details into the table
+router.post('/orders',async(req,res)=>{
+    const {name,email,transactionId,totalAmount,items,status}=req.body;
+
+    if(!name||!email||!transactionId||!totalAmount||!items||!status){
+        return res.status(400).json({message:'Missing requried fields'});
+    }
+    
+    const orderId = new mongoose.Types.ObjectId();
+
+    try{
+        const newOrder=new orders({
+            orderId,
+            name,
+            email,
+            transactionId,
+            totalAmount,
+            items,
+            status, 
+        });
+        await newOrder.save();
+        res.status(201).json({message:'Order details saved successfully',order:newOrder});
+    }catch(err)
+    {
+        console.error('Error saving order:',err);
+        res.status(500).json({message:'Error saving order details'});
+    }
+});
+
+
+
 module.exports = router;
+
